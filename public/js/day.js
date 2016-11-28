@@ -29,12 +29,15 @@ var dayModule = (function () {
 
   $.get("api/days/all")
   .then(function(days){
-    console.log(days);
     days.forEach(function(individualDay){
       var day = new Day(individualDay);
     }, $dayButtons);
   })
   .catch(console.error.bind(console));
+
+
+  
+  
 
   function Day (data) {
     // for brand-new days
@@ -59,13 +62,22 @@ var dayModule = (function () {
   };
 
   Day.prototype.buildButton = function () {
-    this.$button = $('<button class="btn btn-circle day-btn"></button>')
+    this.$button = $('<button class="btn btn-circle day-btn numbered-button"></button>')
       .text(this.number);
     var self = this;
-    console.trace("I have been called!");
     this.$button.on('click', function (){
       this.blur(); // removes focus box from buttons
       tripModule.switchTo(self);
+
+      var dayNumber = this.text();
+
+      $.get("api/days/${dayNumber}")
+      .then(function(day){
+
+      })  
+      .catch(console.error.bind(console));
+
+
     });
     return this;
   };

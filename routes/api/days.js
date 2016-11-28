@@ -21,6 +21,55 @@ router.get('/all', function (req, res, next) {
 });
 
 
+router.post("/:id/hotels", function (req, res, next) {
+	Day.findOne({
+		where: {
+			number: req.params.id
+		}
+	})
+	.then(function(day){
+		day.setHotel(req.body.hotel);
+	})
+	.catch(next);
+});
+
+router.post("/:id/restaurants", function (req, res, next) {
+	Day.findOne({
+		where: {
+			number: req.params.id
+		}
+	})
+	.then(function(day){
+		day.setRestaurant(req.body.restaurant);
+	})
+	.catch(next);
+});
+
+router.post("/:id/activities", function (req, res, next) {
+	Day.findOne({
+		where: {
+			number: req.params.id
+		}
+	})
+	.then(function(day){
+		day.setActivity(req.body.activity);
+	})
+	.catch(next);
+});
+
+router.get("/:id", function (req, res, next){
+	Day.findOne({
+		where: {
+			number: req.params.id
+		}
+	})
+	.then(function(day){
+		res.send(day);
+	})
+	.catch(next);
+});
+
+
 
 
 

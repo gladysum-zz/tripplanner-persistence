@@ -34,11 +34,31 @@ var attractionModule = (function () {
   }
 
   Attraction.prototype.buildItineraryItem = function () {
+    
+    var $day = $("#day-title").children("span").text().slice(4);
+
+    switch (this.type) {
+      case 'hotel': 
+        $.post("/api/days/${$day}/hotels", {hotel: this})
+        .then()
+        .catch(console.error.bind(console));
+      case 'restaurant':
+        $.post("/api/days/${$day}/restaurants", {restaurant: this})
+        .then()
+        .catch(console.error.bind(console));
+      case 'activity': 
+        $.post("/api/days/${$day}/activities", {activity: this})
+        .then()
+        .catch(console.error.bind(console));
+    }
+
+
     var $button = $('<button class="btn btn-xs btn-danger remove btn-circle">x</button>');
     var $title = $('<span class="title"></span>').text(this.name);
     this.$itineraryItem = $('<div class="itinerary-item"></div>')
       .append($title)
       .append($button);
+
     var self = this;
     $button.on('click', function () {
       tripModule.removeFromCurrent(self); // remove from day model
@@ -52,6 +72,13 @@ var attractionModule = (function () {
   };
 
   // main methods meant to be used from any context (e.g. in tripModule)
+
+
+
+
+
+
+
 
   Attraction.prototype.show = function () {
     // itinerary
