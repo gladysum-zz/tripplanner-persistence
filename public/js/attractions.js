@@ -14,9 +14,9 @@ var attractionsModule = (function () {
     // These variables are not available until after the AJAX request succeeds in `options.js`. You definitely need to update something here!
   // ~~~~~~~~~~~~~~~~~~~~~~~
   var enhanced = {
-    hotels: hotels.map(attractionModule.create),
-    restaurants: restaurants.map(attractionModule.create),
-    activities: activities.map(attractionModule.create),
+    // hotels: hotels.map(attractionModule.create),
+    // restaurants: restaurants.map(attractionModule.create),
+    // activities: activities.map(attractionModule.create),
   }
 
   // private helper methods (only available inside the module)
@@ -30,6 +30,10 @@ var attractionsModule = (function () {
   // globally accessible module methods (available to other modules)
 
   var publicAPI = {
+
+    addEnhanced: function(key, collection) {
+      enhanced[key] = collection.map(attractionModule.create);
+    },
 
     getByTypeAndId: function (type, id) {
       if (type === 'hotel') return findById(enhanced.hotels, id);

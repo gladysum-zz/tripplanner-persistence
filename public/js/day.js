@@ -26,14 +26,12 @@ var dayModule = (function () {
   // ~~~~~~~~~~~~~~~~~~~~~~~
     // If you follow the logic of `attractionsModule.getEnhanced` (try following it!), you will note that it uses another method given to us by the `attractionModule` (singular). Try just using the method `attractionModule` gives you. You may run into issues with this - you can update `.getEnhanced` or create some new logic to make everything work.
   // ~~~~~~~~~~~~~~~~~~~~~~~
-  
+
   $.get("api/days/all")
   .then(function(days){
     console.log(days);
     days.forEach(function(individualDay){
       var day = new Day(individualDay);
-      day.buildButton();
-      day.showButton();
     }, $dayButtons);
   })
   .catch(console.error.bind(console));
@@ -64,6 +62,7 @@ var dayModule = (function () {
     this.$button = $('<button class="btn btn-circle day-btn"></button>')
       .text(this.number);
     var self = this;
+    console.trace("I have been called!");
     this.$button.on('click', function (){
       this.blur(); // removes focus box from buttons
       tripModule.switchTo(self);

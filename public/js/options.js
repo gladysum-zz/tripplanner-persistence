@@ -22,7 +22,7 @@ $(function(){
   // ~~~~~~~~~~~~~~~~~~~~~~~
 
   // make all the option tags (second arg of `forEach` is a `this` binding)
-  
+
   var hotels;
   var restaurants;
   var activities;
@@ -30,6 +30,7 @@ $(function(){
   $.get("/api/hotels")
   .then(function(hotels){
     hotels = hotels;
+    attractionsModule.addEnhanced('hotels', hotels);
     hotels.forEach(makeOption, $hotelSelect);
   })
   .catch(console.error.bind(console));
@@ -37,6 +38,7 @@ $(function(){
   $.get("/api/restaurants")
   .then(function(restaurants){
     restaurants = restaurants;
+    attractionsModule.addEnhanced('restaurants', restaurants);
     restaurants.forEach(makeOption, $restaurantSelect);
   })
   .catch(console.error.bind(console));
@@ -44,6 +46,7 @@ $(function(){
   $.get("/api/activities")
   .then(function(activities){
     activities = activities;
+    attractionsModule.addEnhanced('activities', activities);
     activities.forEach(makeOption, $activitySelect);
   })
   .catch(console.error.bind(console));
